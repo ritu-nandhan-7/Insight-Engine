@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pandas
+plotly
+python-multipart
+pydantic-settings
+python-dotenv
+google-genai
+pytest
+httpx
+openpyxl
+xlrd
+pyarrow
+
