@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: insight-engine-backend
+    runtime: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn api.main:app --host 0.0.0.0 --port \$PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    plan: free
+  - type: web
+    name: insight-engine-frontend
+    runtime: node
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run preview -- --port \$PORT
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://insight-engine-8foh.onrender.com
+    plan: free
