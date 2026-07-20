@@ -18,5 +18,5 @@ services:
     staticPublishPath: ./frontend/dist
     envVars:
       - key: VITE_API_BASE_URL
-        value: https://insight-engine-backend.onrender.com
+        value: https://insightengine-backend.onrender.com
     plan: free

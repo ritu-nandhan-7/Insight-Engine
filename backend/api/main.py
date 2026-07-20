@@ -17,6 +17,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "https://insightengine-backend.onrender.com",
         "https://insight-engine-frontend.onrender.com",
         "https://insight-engine-8foh.onrender.com",
     ],
