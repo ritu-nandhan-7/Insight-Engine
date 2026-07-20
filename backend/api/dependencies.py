@@ -34,14 +34,19 @@ def _cleanup_old_sessions() -> None:
 
 
 def get_or_create_session(request: Request) -> InsightEngine:
-    """Get or create an InsightEngine instance for the current session."""
+    """Get or create an InsightEngine instance for the current session.
+
+    Session ID is read from the X-Session-ID header instead of cookies,
+    because the frontend and backend are deployed on different domains
+    and cross-origin cookies are blocked by modern browsers (SameSite).
+    """
     _cleanup_old_sessions()
-    
-    session_id = request.cookies.get("insight_engine_session")
+
+    session_id = request.headers.get("X-Session-ID")
     if not session_id:
         session_id = str(uuid.uuid4())
         logger.info("Created new session: %s", session_id)
-    
+
     if session_id not in _sessions:
         engine = InsightEngine()
         _sessions[session_id] = (engine, time.time())
@@ -49,7 +54,7 @@ def get_or_create_session(request: Request) -> InsightEngine:
     else:
         engine, _ = _sessions[session_id]
         _sessions[session_id] = (engine, time.time())
-    
+
     return engine
 
 
