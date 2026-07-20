@@ -13,7 +13,10 @@ services:
 
   - type: web
     name: insight-engine-frontend
-    runtime: node
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
-    startCommand: cd frontend && npm run preview -- --port 3000
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://insight-engine-backend.onrender.com
     plan: free
