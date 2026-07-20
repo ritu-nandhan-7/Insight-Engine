@@ -1,19 +1,19 @@
-services:  
-"  - type: web"  
-"    name: insight-engine-backend"  
-"    runtime: python"  
-"    buildCommand: cd backend && pip install -r requirements.txt"  
-"    startCommand: cd backend && uvicorn api.main:app --host 0.0.0.0 --port 8000"  
-"    envVars:"  
-"      - key: GEMINI_API_KEY"  
-"        sync: false"  
-"      - key: PYTHON_VERSION"  
-"        value: 3.11.0"  
-"    plan: free" 
-  
-"  - type: web"  
-"    name: insight-engine-frontend"  
-"    runtime: node"  
-"    buildCommand: cd frontend && npm install && npm run build"  
-"    startCommand: cd frontend && npm run preview -- --port 3000"  
-"    plan: free" 
+services:
+  - type: web
+    name: insight-engine-backend
+    runtime: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn api.main:app --host 0.0.0.0 --port 8000
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    plan: free
+
+  - type: web
+    name: insight-engine-frontend
+    runtime: node
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run preview -- --port 3000
+    plan: free
